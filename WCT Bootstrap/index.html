@@ -1,401 +1,519 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitTrack - Fitness Management Platform</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarak — Run Your Virtual Clinic Effortlessly</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-950:#0b2b34;
+    --teal-900:#0d323c;
+    --orange:#f2734f;
+    --orange-dark:#e05e3a;
+    --ink:#12242b;
+    --muted:#66787f;
+    --line:#e7ecec;
+    --bg-soft:#f6f8f8;
+    --card:#f2f5f5;
+  }
+  body{
+    font-family:'Plus Jakarta Sans', sans-serif;
+    color:var(--ink);
+    background:#fff;
+  }
+  h1,h2,h3,h4{font-weight:800; letter-spacing:-0.02em;}
+  .btn-orange{
+    background:var(--orange); border:1px solid var(--orange); color:#fff;
+    border-radius:50px; padding:.7rem 1.5rem; font-weight:600; font-size:.92rem;
+  }
+  .btn-orange:hover{background:var(--orange-dark); border-color:var(--orange-dark); color:#fff;}
+  .btn-outline-ink{
+    border:1px solid #d8dedf; color:var(--ink); border-radius:50px; padding:.7rem 1.5rem;
+    font-weight:600; font-size:.92rem; background:#fff;
+  }
+  .btn-outline-ink:hover{background:var(--bg-soft); color:var(--ink);}
+  .btn-outline-light-pill{
+    border:1px solid rgba(255,255,255,.35); color:#fff; border-radius:50px; padding:.7rem 1.5rem;
+    font-weight:600; font-size:.92rem; background:transparent;
+  }
+  .btn-outline-light-pill:hover{background:rgba(255,255,255,.1); color:#fff;}
+
+  /* NAVBAR */
+  .navbar-custom{padding:1.1rem 0; border-bottom:1px solid var(--line);}
+  .brand-mark{
+    width:30px;height:30px;border-radius:8px;background:var(--ink);
+    display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.85rem;
+  }
+  .nav-link-custom{color:var(--ink); font-weight:500; font-size:.92rem; margin:0 .9rem;}
+  .nav-link-custom.text-orange{color:var(--orange);}
+
+  /* HERO */
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:.4rem; background:var(--ink); color:#fff;
+    border-radius:50px; padding:.35rem .9rem; font-size:.75rem; font-weight:600;
+  }
+  .hero-heading{font-size:2.9rem; line-height:1.12;}
+  .hero-sub{color:var(--muted); font-size:1.02rem; max-width:480px;}
+  .hero-photo-wrap{position:relative; width:100%; max-width:420px; margin-left:auto;}
+  .hero-photo-circle{
+    background:#eef1f1; border-radius:50%; aspect-ratio:1/1; overflow:hidden;
+    display:flex; align-items:flex-end; justify-content:center;
+  }
+  .hero-photo-circle img{width:88%; object-fit:cover; object-position:top;}
+  .float-chip{
+    position:absolute; background:#fff; border-radius:50px; padding:.4rem .85rem;
+    font-size:.72rem; font-weight:700; box-shadow:0 8px 24px rgba(0,0,0,.08);
+    display:flex; align-items:center; gap:.35rem;
+  }
+  .chip-dark{background:var(--ink); color:#fff;}
+  .chip-orange{background:var(--orange); color:#fff;}
+  .chip-ehr{top:6%; left:-4%;}
+  .chip-experience{top:22%; right:-8%;}
+  .chip-billing{bottom:10%; left:0%;}
+
+  /* TRUSTED */
+  .trusted-strip{background:var(--bg-soft); padding:2.4rem 0;}
+  .logo-ipsum{font-weight:700; color:#9aa6a8; font-size:1.05rem; letter-spacing:-0.01em;}
+
+  /* FEATURES */
+  .section-eyebrow{color:var(--muted); font-size:.95rem;}
+  .feature-card{
+    background:var(--card); border-radius:18px; padding:2rem; height:100%;
+  }
+  .feature-icon{
+    width:44px;height:44px;border-radius:10px;background:#fff; display:flex; align-items:center; justify-content:center;
+    font-size:1.2rem; margin-bottom:1.1rem;
+  }
+  .feature-card p{color:var(--muted); font-size:.9rem; margin-bottom:0;}
+
+  /* STEPS DARK */
+  .steps-section{background:var(--teal-900); color:#fff; border-radius:0; padding:5rem 0;}
+  .step-circle{
+    width:42px;height:42px;border-radius:50%;background:#fff; color:var(--teal-900);
+    display:flex; align-items:center; justify-content:center; font-weight:700; margin:0 auto 1.2rem;
+  }
+  .steps-section h5{font-weight:700;}
+  .steps-section p{color:rgba(255,255,255,.65); font-size:.88rem; max-width:230px; margin:0 auto;}
+
+  /* CRYSTAL CLEAR CARE */
+  .clear-care-media{
+    border-radius:18px; overflow:hidden; box-shadow:0 20px 45px rgba(0,0,0,.12);
+  }
+  .clear-care-media img{width:100%; display:block;}
+  .check-item{display:flex; align-items:center; gap:.6rem; margin-bottom:.7rem; font-size:.94rem;}
+  .check-item i{color:#1e9e5a;}
+
+  /* TESTIMONIALS */
+  .testimonial-strip{background:var(--bg-soft); padding:5rem 0;}
+  .testimonial-card{
+    background:#fff; border-radius:16px; padding:1.8rem; height:100%; border:1px solid var(--line);
+  }
+  .testimonial-card p.quote{font-size:.92rem; font-style:italic; color:#33454b;}
+  .avatar-circle{
+    width:40px;height:40px;border-radius:50%; background:#d8dedf; display:inline-flex;
+    align-items:center; justify-content:center; font-weight:700; color:var(--ink); font-size:.85rem;
+  }
+
+  /* PRICING */
+  .pricing-card{
+    border:1px solid var(--line); border-radius:18px; padding:2rem; height:100%; background:#fff;
+  }
+  .pricing-card.featured{
+    border:2px solid var(--orange); position:relative; box-shadow:0 20px 45px rgba(242,115,79,.18);
+  }
+  .pricing-badge{
+    position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+    background:var(--orange); color:#fff; font-size:.7rem; font-weight:700;
+    padding:.3rem .9rem; border-radius:50px;
+  }
+  .price-value{font-size:2.2rem; font-weight:800;}
+  .price-sub{color:var(--muted); font-size:.85rem;}
+  .plan-feature{font-size:.88rem; display:flex; align-items:center; gap:.5rem; margin-bottom:.55rem;}
+  .plan-feature i{font-size:.85rem;}
+
+  /* FAQ */
+  .faq-strip{background:var(--bg-soft); padding:5rem 0;}
+  .accordion-button{font-weight:600; font-size:.95rem;}
+  .accordion-button:not(.collapsed){color:var(--orange); background:#fff;}
+  .accordion-item{border:1px solid var(--line) !important; border-radius:12px !important; overflow:hidden; margin-bottom:.8rem;}
+  .accordion-button:focus{box-shadow:none;}
+
+  /* FOOTER */
+  footer{background:var(--teal-950); color:rgba(255,255,255,.7); padding:4rem 0 1.5rem;}
+  footer h6{color:#fff; font-weight:700; margin-bottom:1.1rem; font-size:.9rem;}
+  footer a{color:rgba(255,255,255,.6); text-decoration:none; font-size:.85rem; display:block; margin-bottom:.6rem;}
+  footer a:hover{color:#fff;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1); padding-top:1.2rem; font-size:.78rem; color:rgba(255,255,255,.45);}
+
+  @media (max-width: 991px){
+    .hero-heading{font-size:2.2rem;}
+    .float-chip{display:none;}
+    .hero-photo-wrap{margin:2rem auto 0;}
+  }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">FitTrack</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#how-it-works">How it Works</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
-                </ul>
-                <button class="btn btn-primary ms-3" onclick="FitTrack.handleGetStarted()">Get Started</button>
-            </div>
-        </div>
-    </nav>
 
-   
-    <section class="hero py-5 bg-light">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <span class="badge bg-secondary mb-3">Recommended Solution</span>
-                    <h1 class="display-4 fw-bold mb-4">Transform Your Fitness Journey</h1>
-                    <p class="lead text-muted mb-4">
-                        An all-in-one fitness platform designed for modern athletes. Track workouts, manage nutrition, and achieve your fitness goals in one unified workspace.
-                    </p>
-                    <div class="d-flex gap-3">
-                        <button class="btn btn-primary btn-lg" onclick="FitTrack.handleGetStarted()">Get Started</button>
-                        <button class="btn btn-outline-primary btn-lg" onclick="FitTrack.handleTourClick()">Take a Quick Tour</button>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <div class="hero-image bg-primary bg-opacity-10 p-5 rounded">
-                        <img src="image/cbum-workout.png " alt="FitTrack Dashboard" class="img-fluid rounded">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-custom sticky-top bg-white">
+  <div class="container d-flex align-items-center">
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
+      <span class="brand-mark">M</span>
+      <span style="font-size:1.05rem;">Sarak</span>
+    </a>
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navMain">
+      <ul class="navbar-nav mx-auto my-3 my-lg-0">
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#features">Features</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#how">How It Work</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#testimonials">Testimonials</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom" href="#pricing">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link nav-link-custom text-orange" href="#faq">Faq</a></li>
+      </ul>
+      <a href="#" class="btn btn-orange">Get a Demo</a>
+    </div>
+  </div>
+</nav>
 
-   
-    <section class="py-4 bg-white border-top">
-        <div class="container">
-            <p class="text-center text-muted mb-3">Trusted by leading fitness enthusiasts worldwide</p>
-            <div class="row justify-content-center g-4">
-                <div class="col-6 col-md-3 text-center">
-                    <p class="text-muted">LogoPlaceholder 1</p>
-                </div>
-                <div class="col-6 col-md-3 text-center">
-                    <p class="text-muted">LogoPlaceholder 2</p>
-                </div>
-                <div class="col-6 col-md-3 text-center">
-                    <p class="text-muted">LogoPlaceholder 3</p>
-                </div>
-                <div class="col-6 col-md-3 text-center">
-                    <p class="text-muted">LogoPlaceholder 4</p>
-                </div>
-            </div>
+<!-- HERO -->
+<section class="py-5">
+  <div class="container py-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="hero-badge"><i class="bi bi-shield-check"></i> HIPAA Compliant &amp; Secure</span>
+        <h1 class="hero-heading mt-3 mb-3">Run Your Virtual Clinic Effortlessly</h1>
+        <p class="hero-sub mb-4">All-in-one telehealth platform designed for modern practices. Manage patients, clinical notes, and secure HD video consultations in one unified workspace.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="#" class="btn btn-orange">Get a Demo</a>
+          <a href="#" class="btn btn-outline-ink">Take a Quick tour</a>
         </div>
-    </section>
-
-  
-    <section id="features" class="py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold">Fitness Excellence Integrated</h2>
-                <p class="text-muted lead">Everything you need to achieve peak fitness performance and reach your goals</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card p-4 bg-white rounded-3 h-100">
-                        <div class="feature-icon mb-3">💪</div>
-                        <h5 class="fw-bold">Workout Tracking</h5>
-                        <p class="text-muted">Log exercises, sets, reps, and weight with detailed analytics and progress tracking</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card p-4 bg-white rounded-3 h-100">
-                        <div class="feature-icon mb-3">📅</div>
-                        <h5 class="fw-bold">Smart Training Plans</h5>
-                        <p class="text-muted">AI-powered personalized workout programs adapted to your fitness level and goals</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card p-4 bg-white rounded-3 h-100">
-                        <div class="feature-icon mb-3">🥗</div>
-                        <h5 class="fw-bold">Nutrition Management</h5>
-                        <p class="text-muted">Track calories, macros, and micronutrients with integration to nutrition databases</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card p-4 bg-white rounded-3 h-100">
-                        <div class="feature-icon mb-3">📊</div>
-                        <h5 class="fw-bold">Progress Analytics</h5>
-                        <p class="text-muted">Visualize your gains with comprehensive charts and detailed performance metrics</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card p-4 bg-white rounded-3 h-100">
-                        <div class="feature-icon mb-3">👥</div>
-                        <h5 class="fw-bold">Community Features</h5>
-                        <p class="text-muted">Connect with other fitness enthusiasts and share your journey and achievements</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="feature-card p-4 bg-white rounded-3 h-100">
-                        <div class="feature-icon mb-3">📱</div>
-                        <h5 class="fw-bold">Mobile Integration</h5>
-                        <p class="text-muted">Seamless sync across devices with offline access and real-time notifications</p>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-circle">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=800&auto=format&fit=crop" alt="Clinician using a tablet">
+          </div>
+          <span class="float-chip chip-dark chip-ehr"><i class="bi bi-file-earmark-medical"></i> EHR</span>
+          <span class="float-chip chip-orange chip-experience"><i class="bi bi-heart"></i> Patients Experience</span>
+          <span class="float-chip chip-dark chip-billing"><i class="bi bi-credit-card"></i> Billing and Payments</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-  
-    <section id="how-it-works" class="py-5 bg-primary text-white">
-        <div class="container">
-            <h2 class="text-center mb-5 display-5 fw-bold">Get started with FitTrack in 3 easy steps</h2>
-            <div class="row g-4 text-center">
-                <div class="col-md-4">
-                    <div class="step-number bg-white text-primary rounded-circle mx-auto mb-3" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">1</div>
-                    <h5 class="fw-bold">Create Account</h5>
-                    <p>Sign up and set up your fitness profile with your goals and preferences</p>
-                </div>
-                <div class="col-md-4">
-                    <div class="step-number bg-white text-primary rounded-circle mx-auto mb-3" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">2</div>
-                    <h5 class="fw-bold">Choose Your Plan</h5>
-                    <p>Select from personalized training programs tailored to your fitness level</p>
-                </div>
-                <div class="col-md-4">
-                    <div class="step-number bg-white text-primary rounded-circle mx-auto mb-3" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold;">3</div>
-                    <h5 class="fw-bold">Start Training</h5>
-                    <p>Begin your fitness journey and track your progress in real-time</p>
-                </div>
-            </div>
-            <div class="text-center mt-5">
-                <button class="btn btn-light btn-lg me-2" onclick="FitTrack.handleGetStarted()">Get Started</button>
-                <button class="btn btn-outline-light btn-lg">Learn More</button>
-            </div>
+<!-- TRUSTED BY -->
+<section class="trusted-strip">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-3">
+        <p class="mb-0 fw-semibold small">Trusted by</p>
+        <p class="mb-0 text-muted small">We safeguard your practice with full security and HIPAA compliance.</p>
+      </div>
+      <div class="col-lg-9">
+        <div class="d-flex flex-wrap justify-content-lg-end justify-content-start gap-4 align-items-center">
+          <span class="logo-ipsum"><i class="bi bi-triangle-fill text-primary me-1"></i>LOGOIPSUM</span>
+          <span class="logo-ipsum"><i class="bi bi-arrow-repeat text-info me-1"></i>LOGOIPSUM</span>
+          <span class="logo-ipsum"><i class="bi bi-hexagon-fill text-danger me-1"></i>LOGOIPSUM</span>
+          <span class="logo-ipsum"><i class="bi bi-asterisk text-primary me-1"></i>Logoipsum</span>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-  
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="case-study-image bg-primary bg-opacity-10 p-4 rounded">
-                        <img src="image/Img.jpg" alt="Case Study" class="img-fluid rounded">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <h3 class="fw-bold mb-3">Peak Performance Tracking</h3>
-                    <p class="text-muted mb-3">
-                        Experience precision fitness tracking with real-time data analytics. Monitor every lift, every step, and every calorie burned with complete accuracy.
-                    </p>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">✓ Real-time workout monitoring</li>
-                        <li class="mb-2">✓ Personalized coaching insights</li>
-                        <li class="mb-2">✓ Advanced body composition tracking</li>
-                    </ul>
-                </div>
-            </div>
+<!-- FEATURES -->
+<section id="features" class="py-5">
+  <div class="container py-5">
+    <div class="text-center mx-auto mb-5" style="max-width:520px;">
+      <h2 class="mb-2">Clinical Excellence Integrated</h2>
+      <p class="section-eyebrow mb-0">Everything you need to provide top-tier care from anywhere in the world.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-camera-video"></i></div>
+          <h5 class="mb-2">Video Consultations</h5>
+          <p>HD, peer-to-peer encrypted video calls with built-in waiting rooms and screen sharing.</p>
         </div>
-    </section>
-
-  
-    <section id="testimonials" class="py-5 bg-white">
-        <div class="container">
-            <h2 class="text-center display-5 fw-bold mb-5">What success looks like</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="testimonial-card p-4 bg-light rounded-3">
-                        <p class="text-muted mb-3 fst-italic">"FitTrack transformed my training regimen. I've seen incredible gains and consistency like never before."</p>
-                        <div class="d-flex align-items-center">
-                            <div class="bg-primary rounded-circle p-2 text-white" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">A</div>
-                            <div class="ms-3">
-                                <p class="fw-bold mb-0">Alex Martinez</p>
-                                <small class="text-muted">Fitness Enthusiast</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card p-4 bg-light rounded-3">
-                        <p class="text-muted mb-3 fst-italic">"The nutrition tracking and meal planning features have helped me finally balance my diet with my workouts."</p>
-                        <div class="d-flex align-items-center">
-                            <div class="bg-success rounded-circle p-2 text-white" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">J</div>
-                            <div class="ms-3">
-                                <p class="fw-bold mb-0">Jessica Chen</p>
-                                <small class="text-muted">Personal Trainer</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card p-4 bg-light rounded-3">
-                        <p class="text-muted mb-3 fst-italic">"The community support and accountability features keep me motivated to achieve my fitness goals consistently."</p>
-                        <div class="d-flex align-items-center">
-                            <div class="bg-warning rounded-circle p-2 text-white" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">M</div>
-                            <div class="ms-3">
-                                <p class="fw-bold mb-0">Marcus Johnson</p>
-                                <small class="text-muted">Athletes Program</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-calendar-check"></i></div>
+          <h5 class="mb-2">Scheduling</h5>
+          <p>Automated booking, timezone detection, and calendar sync with Google and Outlook.</p>
         </div>
-    </section>
-
-    
-    <section id="pricing" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center display-5 fw-bold mb-5">Flexible Plans for Every Goal</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="pricing-card p-4 bg-white rounded-3 border text-center h-100">
-                        <h5 class="text-muted mb-2">BEGINNER</h5>
-                        <h2 class="fw-bold mb-1">$9<span class="fs-6 text-muted">/month</span></h2>
-                        <ul class="list-unstyled mt-4 mb-4 text-start">
-                            <li class="mb-2">✓ Basic workout tracking</li>
-                            <li class="mb-2">✓ Nutrition logging</li>
-                            <li class="mb-2">✓ Progress analytics</li>
-                            <li class="mb-2">✓ Mobile app access</li>
-                        </ul>
-                        <button class="btn btn-outline-primary w-100" onclick="FitTrack.handlePricingSelection('Beginner')">Select Plan</button>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pricing-card p-4 bg-white rounded-3 border text-center h-100 position-relative">
-                        <span class="badge bg-danger position-absolute top-0 start-50 translate-middle">RECOMMENDED</span>
-                        <h5 class="text-muted mb-2 mt-3">PRO</h5>
-                        <h2 class="fw-bold mb-1">$29<span class="fs-6 text-muted">/month</span></h2>
-                        <ul class="list-unstyled mt-4 mb-4 text-start">
-                            <li class="mb-2">✓ Advanced workout plans</li>
-                            <li class="mb-2">✓ AI coaching insights</li>
-                            <li class="mb-2">✓ Meal planning</li>
-                            <li class="mb-2">✓ Community access</li>
-                        </ul>
-                        <button class="btn btn-primary w-100" onclick="FitTrack.handlePricingSelection('Pro')">Select Plan</button>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="pricing-card p-4 bg-white rounded-3 border text-center h-100">
-                        <h5 class="text-muted mb-2">ELITE</h5>
-                        <h2 class="fw-bold mb-1">$79<span class="fs-6 text-muted">/month</span></h2>
-                        <ul class="list-unstyled mt-4 mb-4 text-start">
-                            <li class="mb-2">✓ Personal coaching</li>
-                            <li class="mb-2">✓ Custom training programs</li>
-                            <li class="mb-2">✓ Nutrition consultation</li>
-                            <li class="mb-2">✓ Priority support</li>
-                        </ul>
-                        <button class="btn btn-outline-primary w-100" onclick="FitTrack.handleContactClick()">Contact Sales</button>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-clipboard2-pulse"></i></div>
+          <h5 class="mb-2">Digital EHR</h5>
+          <p>Structured clinical notes, ICD-10 coding, and longitudinal patient health records.</p>
         </div>
-    </section>
-
-  
-    <section class="py-5 bg-white">
-        <div class="container">
-            <h2 class="text-center display-5 fw-bold mb-5">Frequently Asked Questions</h2>
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <div class="accordion" id="faqAccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                    How does FitTrack track my progress?
-                                </button>
-                            </h2>
-                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    FitTrack uses advanced algorithms to track your workouts, nutrition, and body composition changes. All data is stored in real-time for immediate access and historical analysis.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                    Can I sync FitTrack with other fitness apps?
-                                </button>
-                            </h2>
-                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Yes, FitTrack integrates with popular fitness devices and apps including Apple Health, Google Fit, and Fitbit for seamless data synchronization.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                    Is there offline access on mobile?
-                                </button>
-                            </h2>
-                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Absolutely! FitTrack's mobile app allows you to log workouts and track nutrition offline. Your data will sync automatically when you're back online.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                    What payment methods do you accept?
-                                </button>
-                            </h2>
-                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    We accept all major credit cards, PayPal, and Apple Pay. You can switch or cancel your subscription at any time with no penalties.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                    Do you offer a free trial?
-                                </button>
-                            </h2>
-                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Yes! We offer a 14-day free trial for all new users. No credit card required to get started.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
-                                    Is my data secure?
-                                </button>
-                            </h2>
-                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Absolutely. We use bank-level encryption and comply with all major data protection regulations including GDPR and CCPA.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-capsule"></i></div>
+          <h5 class="mb-2">ePrescriptions</h5>
+          <p>Securely send prescriptions directly to pharmacies with automated interactions check.</p>
         </div>
-    </section>
-
-  
-    <footer class="py-5 bg-dark text-white">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-3">
-                    <h5 class="fw-bold mb-3">FitTrack</h5>
-                    <p class="text-muted small">Empowering fitness enthusiasts with modern training and tracking technology.</p>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="fw-bold">Product</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#features" class="text-muted text-decoration-none">Features</a></li>
-                        <li><a href="#pricing" class="text-muted text-decoration-none">Pricing</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Mobile App</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="fw-bold">Company</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-muted text-decoration-none">About Us</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Blog</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Community</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="fw-bold">Legal</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-muted text-decoration-none">Privacy Policy</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Terms of Service</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="my-4">
-            <p class="text-center text-muted small">© 2024 FitTrack. All rights reserved.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-credit-card-2-front"></i></div>
+          <h5 class="mb-2">Payments</h5>
+          <p>Integrated billing, insurance claims processing, and direct patient payments.</p>
         </div>
-    </footer>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="bi bi-shield-lock"></i></div>
+          <h5 class="mb-2">Secure &amp; Compliant</h5>
+          <p>SOC2 Type II, HIPAA, and GDPR compliant with data residency options.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+<!-- STEPS -->
+<section id="how" class="steps-section">
+  <div class="container text-center">
+    <h2 class="mb-2">Get started with Sarak in 3 easy steps</h2>
+    <p class="mx-auto mb-5" style="max-width:480px; color:rgba(255,255,255,.65); font-size:.92rem;">
+      Simple, supported, and designed to fit the way you work. From setup to go-live, we'll guide you every step so your practice sees value from day one.
+    </p>
+    <div class="row g-5 mb-5">
+      <div class="col-md-4">
+        <div class="step-circle">1</div>
+        <h5>Sign Up</h5>
+        <p>Create your provider profile and customize your clinic branding.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="step-circle">2</div>
+        <h5>Add Staff</h5>
+        <p>Invite your team of doctors, specialists, and front-desk admins.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="step-circle">3</div>
+        <h5>Start Consults</h5>
+        <p>Begin hosting secure consultations and managing patient care.</p>
+      </div>
+    </div>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="#" class="btn btn-orange">Get a Demo</a>
+      <a href="#" class="btn btn-outline-light-pill">Take a Quick tour</a>
+    </div>
+  </div>
+</section>
+
+<!-- CRYSTAL CLEAR CARE -->
+<section class="py-5">
+  <div class="container py-5">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="clear-care-media position-relative">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?q=80&w=900&auto=format&fit=crop" alt="Doctor on a video consultation">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <h2 class="mb-3">Crystal Clear Care</h2>
+        <p class="text-muted mb-4">Experience zero-latency video consultations designed for clinical accuracy. Share medical records and record sessions with one click.</p>
+        <div class="check-item"><i class="bi bi-check-circle-fill"></i> 4K Resolution Video Support</div>
+        <div class="check-item"><i class="bi bi-check-circle-fill"></i> Built-in AI Scribe for clinical notes</div>
+        <div class="check-item"><i class="bi bi-check-circle-fill"></i> Integrated vitals monitoring</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonial-strip">
+  <div class="container">
+    <div class="text-center mx-auto mb-5" style="max-width:560px;">
+      <h2 class="mb-2">What success looks like with Tebra</h2>
+      <p class="section-eyebrow mb-0">Our clients don't just work with us, they grow with us. Here's what a few of our satisfied customers had to say about their experience with Sarak.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <p class="quote mb-4">"Sarak transformed how I manage my pediatric practice. The patient experience is seamless, and my no-show rates dropped by 40%."</p>
+          <div class="d-flex align-items-center gap-2">
+            <span class="avatar-circle">SJ</span>
+            <div>
+              <div class="fw-semibold small">Dr. Sarah Jenkins</div>
+              <div class="text-muted" style="font-size:.75rem;">Pediatrician</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <p class="quote mb-4">"The HIPAA compliance and security were non-negotiable for my clinic. Sarak delivered peace of mind and excellent UX."</p>
+          <div class="d-flex align-items-center gap-2">
+            <span class="avatar-circle">MT</span>
+            <div>
+              <div class="fw-semibold small">Dr. Mark Thompson</div>
+              <div class="text-muted" style="font-size:.75rem;">Cardiologist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="testimonial-card">
+          <p class="quote mb-4">"Scaling my mental health practice across state lines was only possible because of their robust licensing and scheduling tools."</p>
+          <div class="d-flex align-items-center gap-2">
+            <span class="avatar-circle">ER</span>
+            <div>
+              <div class="fw-semibold small">Dr. Elena Rodriguez</div>
+              <div class="text-muted" style="font-size:.75rem;">Psychiatrist</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="py-5">
+  <div class="container py-5">
+    <div class="text-center mx-auto mb-5" style="max-width:520px;">
+      <h2 class="mb-2">Flexible Plans for Every Scale</h2>
+      <p class="section-eyebrow mb-0">Everything you need to provide top-tier care from anywhere in the world.</p>
+    </div>
+    <div class="row g-4 justify-content-center align-items-center">
+      <div class="col-md-4">
+        <div class="pricing-card">
+          <p class="text-muted small text-uppercase fw-semibold mb-3">Starter</p>
+          <div class="price-value">$49<span class="price-sub">/mo</span></div>
+          <hr class="my-3">
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> 1 Provider</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> Unlimited Consultations</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> Basic EHR</div>
+          <div class="plan-feature text-muted"><i class="bi bi-x-circle text-secondary"></i> AI Note Assistant</div>
+          <a href="#" class="btn btn-outline-ink w-100 mt-3">Select Plan</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pricing-card featured">
+          <span class="pricing-badge">Most Popular</span>
+          <p class="text-muted small text-uppercase fw-semibold mb-3">Professional</p>
+          <div class="price-value">$129<span class="price-sub">/mo</span></div>
+          <hr class="my-3">
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> Up to 5 Providers</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> Full EHR &amp; ePrescriptions</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> Custom Branding</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> AI Clinical Assistant</div>
+          <a href="#" class="btn btn-orange w-100 mt-3">Select Plan</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pricing-card">
+          <p class="text-muted small text-uppercase fw-semibold mb-3">Enterprise</p>
+          <div class="price-value" style="font-size:1.7rem;">Custom</div>
+          <hr class="my-3">
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> Unlimited Providers</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> Dedicated Success Manager</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> API &amp; Webhook Access</div>
+          <div class="plan-feature"><i class="bi bi-check-circle-fill text-success"></i> On-Prem Data Hosting</div>
+          <a href="#" class="btn btn-outline-ink w-100 mt-3">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq-strip">
+  <div class="container">
+    <div class="text-center mx-auto mb-5" style="max-width:520px;">
+      <h2 class="mb-2">Frequently Asked Questions</h2>
+      <p class="section-eyebrow mb-0">Simple, supported, and designed to fit the way you work. From setup to go-live, we'll guide you every step so your practice sees value from day one.</p>
+    </div>
+    <div class="accordion mx-auto" id="faqAccordion" style="max-width:720px;">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+            Is Sarak HIPAA compliant?
+          </button>
+        </h2>
+        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+          <div class="accordion-body text-muted small">
+            Yes. Sarak is fully HIPAA compliant, SOC 2 Type II certified, and offers GDPR-ready data residency options for practices operating internationally.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+            How does billing and payment work?
+          </button>
+        </h2>
+        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body text-muted small">
+            Sarak integrates directly with major payment processors and insurance clearinghouses, letting you collect co-pays, submit claims, and reconcile payments from one dashboard.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+            Can I integrate my current EHR?
+          </button>
+        </h2>
+        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body text-muted small">
+            Yes, Sarak supports HL7 and FHIR-based integrations with most major EHR systems, so you can migrate or sync records without disrupting existing workflows.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-4 mb-4">
+      <div class="col-lg-4">
+        <h6 class="text-white">Sarak</h6>
+        <p class="small">Empowering healthcare providers with modern, secure, and intuitive digital clinic tools.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Product</h6>
+        <a href="#">Telehealth Video</a>
+        <a href="#">Patient Portal</a>
+        <a href="#">Smart Billing</a>
+        <a href="#">ePrescriptions</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Company</h6>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Press Kit</a>
+        <a href="#">Security</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Legal</h6>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">HIPAA Compliance</a>
+        <a href="#">GDPR</a>
+      </div>
+    </div>
+    <div class="footer-bottom d-flex flex-wrap justify-content-between">
+      <span>© 2026 Sarak, HIPAA Compliant &amp; Secure. All rights reserved.</span>
+      <span>System Status: <strong class="text-white">Operational</strong></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
