@@ -1,0 +1,239 @@
+/* ===== CSS variables ===== */
+:root {
+  --bg: #f2f3f5;
+  --card-bg: #ffffff;
+  --text-dark: #1f2937;
+  --text-muted: #6b7280;
+  --border: #d1d5db;
+  --blue: #3b82f6;
+  --blue-dark: #2563eb;
+  --error: #dc2626;
+  --row-alt: #f9fafb;
+
+  /* Score color tiers */
+  --score-high: #16a34a;   /* 90-100 */
+  --score-good: #2563eb;   /* 70-89  */
+  --score-mid: #d97706;    /* 50-69  */
+  --score-low: #dc2626;    /* below 50 */
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Reset & base ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  /* Center the card both vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg);
+  padding: 20px;
+}
+
+/* ===== Card ===== */
+.card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ===== Score list ===== */
+.score-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.score-item {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background-color: var(--row-alt);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+
+  /* Smooth entrance animation when a score is added */
+  animation: slideIn 0.35s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Colorful score tiers */
+.score-item.high { color: var(--score-high); }
+.score-item.good { color: var(--score-good); }
+.score-item.mid  { color: var(--score-mid); }
+.score-item.low  { color: var(--score-low); }
+
+/* ===== Stats ===== */
+.stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px;
+  background-color: var(--row-alt);
+  border-radius: 12px;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.stat-value {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* ===== Input row ===== */
+.input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.score-input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.score-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Input focus effect */
+.score-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+/* ===== Button ===== */
+.add-btn {
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.add-btn:hover {
+  background-color: var(--blue-dark);
+  transform: translateY(-2px);
+}
+
+.add-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.add-btn:focus-visible {
+  outline: 2px solid var(--blue-dark);
+  outline-offset: 2px;
+}
+
+/* ===== Error message ===== */
+.error-msg {
+  margin: -8px 0 0;
+  min-height: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--error);
+  text-align: center;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 400px) {
+  .card {
+    padding: 26px 18px;
+  }
+
+  .title {
+    font-size: 21px;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
