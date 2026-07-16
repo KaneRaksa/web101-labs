@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Score Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="card">
+    <h1 class="title">Student Scores</h1>
+
+    <ul id="scoreList" class="score-list">
+      <!-- Score items are rendered by script.js -->
+    </ul>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-label">Highest</span>
+        <span id="highestScore" class="stat-value">—</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Lowest</span>
+        <span id="lowestScore" class="stat-value">—</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Average</span>
+        <span id="averageScore" class="stat-value">—</span>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <label for="scoreInput" class="visually-hidden">New score</label>
+      <input
+        type="text"
+        inputmode="numeric"
+        id="scoreInput"
+        class="score-input"
+        placeholder="New score"
+      >
+      <button id="addBtn" class="add-btn">Add Score</button>
+    </div>
+
+    <p id="errorMsg" class="error-msg"></p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
