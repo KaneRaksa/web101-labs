@@ -1,0 +1,39 @@
+body{
+    background:#f2f2f2;
+}
+
+.card{
+    border-radius:12px;
+}
+
+.product-card{
+
+    transition:.3s;
+
+}
+
+.product-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.info{
+
+    font-size:14px;
+
+}
+
+.cart-item{
+
+    border-bottom:1px solid #ddd;
+
+    padding:10px 0;
+
+}
+
+.sticky-top{
+
+    top:20px;
+
+}
